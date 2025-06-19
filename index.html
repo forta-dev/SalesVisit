@@ -6,10 +6,8 @@
   <title>GPS Location Form</title>
 
   <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Icons (optional, but good for PWA) -->
-  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-128.png" />
   <link rel="apple-touch-icon" href="icons/icon-512.png" />
 
   <!-- Service Worker Registration -->
@@ -19,10 +17,7 @@
         .then(reg => console.log('Service worker registered.'))
         .catch(err => console.error('Service worker error:', err));
     }
-  </script>
 
-  <!-- GPS Capture -->
-  <script>
     function sendLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -32,7 +27,6 @@
           document.getElementById("lat").value = lat;
           document.getElementById("lon").value = lon;
 
-          // Submit the form automatically
           document.getElementById("locationForm").submit();
         }, function (error) {
           alert("Location error: " + error.message);
@@ -44,11 +38,13 @@
   </script>
 </head>
 
-<body onload="sendLocation()">
-  <h3>Sending your location...</h3>
+<body>
+  <h2>Send My Location</h2>
+
   <form id="locationForm" action="https://YOUR-N8N-URL/webhook/location-track" method="post">
     <input type="hidden" id="lat" name="lat" />
     <input type="hidden" id="lon" name="lon" />
+    <button type="button" onclick="sendLocation()">Send Location</button>
   </form>
 </body>
 </html>

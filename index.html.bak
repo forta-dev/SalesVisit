@@ -1,8 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GPS Location Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Icons (optional, but good for PWA) -->
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-512.png" />
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service worker registered.'))
+        .catch(err => console.error('Service worker error:', err));
+    }
+  </script>
+
+  <!-- GPS Capture -->
   <script>
     function sendLocation() {
       if (navigator.geolocation) {
@@ -24,6 +43,7 @@
     }
   </script>
 </head>
+
 <body onload="sendLocation()">
   <h3>Sending your location...</h3>
   <form id="locationForm" action="https://YOUR-N8N-URL/webhook/location-track" method="post">
@@ -32,10 +52,3 @@
   </form>
 </body>
 </html>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service worker registered.'))
-      .catch(err => console.error('Service worker error:', err));
-  }
-</script>
