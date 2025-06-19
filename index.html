@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GPS Location Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    function sendLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          document.getElementById("lat").value = lat;
+          document.getElementById("lon").value = lon;
+
+          // Submit the form automatically
+          document.getElementById("locationForm").submit();
+        }, function (error) {
+          alert("Location error: " + error.message);
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+  </script>
+</head>
+<body onload="sendLocation()">
+  <h3>Sending your location...</h3>
+  <form id="locationForm" action="https://YOUR-N8N-URL/webhook/location-track" method="post">
+    <input type="hidden" id="lat" name="lat" />
+    <input type="hidden" id="lon" name="lon" />
+  </form>
+</body>
+</html>
