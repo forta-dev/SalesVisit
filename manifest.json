@@ -1,7 +1,7 @@
 {
-  "name": "My PWA Form",
-  "short_name": "PWAForm",
-  "start_url": "/index.html",
+  "name": "Sales Visit",
+  "short_name": "SalesVisit",
+  "start_url": "https://forta-dev.github.io/SalesVisit/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1976d2",
